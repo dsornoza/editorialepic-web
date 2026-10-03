@@ -1,0 +1,19 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Editores
+.vscode/
+.idea/
+*.swp
+*~
+
+# Claude Code
+.claude/
+
+# Archivos de trabajo
+*.log
+*.tmp
+node_modules/
