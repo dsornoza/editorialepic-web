@@ -144,6 +144,26 @@
   .book h3{font-size:16px;margin-bottom:4px;}
   .book p{font-size:14px;color:var(--ink-secondary);margin:0;}
 
+  .oa{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:13px;font-weight:600;color:#f6f2ea;
+    border:1px solid rgba(246,242,234,.4);border-radius:999px;
+    padding:6px 14px;margin-bottom:20px;
+  }
+  .oa::before{content:"";width:8px;height:8px;border-radius:50%;background:#e8b27d;}
+  .book.real{border-style:solid;display:flex;flex-direction:column;}
+  .book.real img{
+    width:100%;aspect-ratio:3/4;object-fit:cover;display:block;
+    border-radius:var(--radius-md);margin-bottom:14px;background:var(--surface-300);
+  }
+  .book.real .meta{flex:1;margin-bottom:14px;}
+  .book.real .links{display:flex;flex-wrap:wrap;gap:8px;}
+  .book.real .links a{
+    font-size:13px;font-weight:600;text-decoration:none;
+    padding:8px 14px;border-radius:var(--radius-md);
+    border:1px solid var(--primary);color:var(--primary);
+  }
+  .book.real .links a.main{background:var(--primary);color:var(--on-primary);}
   .cta{text-align:center;}
   .cta .head{margin:0 auto 28px;}
   .cta .mail{
@@ -200,7 +220,8 @@
 
 <header class="hero" id="inicio">
   <div class="wrap">
-    <span class="eyebrow">Editorial académica · Ecuador</span>
+    <span class="eyebrow">Editorial académica · Ecuador</span><br>
+    <span class="oa">Todas nuestras publicaciones son de acceso abierto</span>
     <h1>Publicamos la investigación que otros apenas citan.</h1>
     <p>
       EPICEC es una editorial ecuatoriana de libros y revistas científicas,
@@ -266,7 +287,7 @@
     <div class="grid g3">
       <div class="box"><span class="num">1</span><h3>Envío del manuscrito</h3><p>Nos escribes con tu propuesta y la evaluamos editorialmente.</p></div>
       <div class="box"><span class="num">2</span><h3>Edición y revisión</h3><p>Trabajamos contigo el texto, el arbitraje y la maquetación.</p></div>
-      <div class="box"><span class="num">3</span><h3>Publicación y registro</h3><p>ISBN, depósito legal y difusión de tu obra publicada.</p></div>
+      <div class="box"><span class="num">3</span><h3>Publicación y registro</h3><p>ISBN, depósito legal y difusión de tu obra en acceso abierto, con DOI en Zenodo.</p></div>
     </div>
   </div>
 </section>
@@ -274,11 +295,11 @@
 <section class="alt" id="catalogo">
   <div class="wrap">
     <div class="head">
-      <span class="eyebrow">Catálogo</span>
-      <h2>Nuestros primeros títulos</h2>
-      <p>Estamos preparando las primeras publicaciones. Aquí aparecerán con portada, autores y enlace de lectura.</p>
+      <span class="eyebrow">Catálogo · Acceso abierto</span>
+      <h2>Libros publicados</h2>
+      <p>Todos nuestros libros son de acceso abierto: puedes leerlos y descargarlos sin costo. Cada obra se deposita en Zenodo con su propio DOI.</p>
     </div>
-    <div class="grid g3">
+    <div class="grid g3" id="libros">
       <div class="book"><div class="cover">Próximamente</div><h3>Título por anunciar</h3><p>EPICEC · 2026</p></div>
       <div class="book"><div class="cover">Próximamente</div><h3>Título por anunciar</h3><p>EPICEC · 2026</p></div>
       <div class="book"><div class="cover">Próximamente</div><h3>Título por anunciar</h3><p>EPICEC · 2026</p></div>
@@ -331,5 +352,44 @@
   <div class="legal"><div class="wrap">&copy; 2026 EPICEC S.A.S. Todos los derechos reservados.</div></div>
 </footer>
 
+<script>
+(function(){
+  var cont=document.getElementById("libros");
+  if(!cont) return;
+  fetch("libros.json",{cache:"no-cache"}).then(function(r){return r.json();}).then(function(data){
+    var libros=(data&&data.libros)||[];
+    if(!libros.length) return;
+    cont.textContent="";
+    libros.forEach(function(l){
+      var card=document.createElement("article");
+      card.className="book real";
+      if(l.portada){
+        var img=document.createElement("img");
+        img.src=l.portada; img.alt="Portada de "+l.titulo; img.loading="lazy";
+        card.appendChild(img);
+      }
+      var meta=document.createElement("div"); meta.className="meta";
+      var h=document.createElement("h3"); h.textContent=l.titulo; meta.appendChild(h);
+      var p=document.createElement("p");
+      p.textContent=[(l.autores||[]).join(", "),l.anio].filter(Boolean).join(" · ");
+      meta.appendChild(p);
+      if(l.isbn){var i=document.createElement("p"); i.textContent="ISBN "+l.isbn; meta.appendChild(i);}
+      card.appendChild(meta);
+      var links=document.createElement("div"); links.className="links";
+      function add(txt,href,main){
+        if(!href) return;
+        var a=document.createElement("a"); a.href=href; a.textContent=txt;
+        a.target="_blank"; a.rel="noopener";
+        if(main) a.className="main";
+        links.appendChild(a);
+      }
+      add("Leer / descargar",l.zenodo,true);
+      if(l.doi) add("DOI","https://doi.org/"+l.doi,false);
+      card.appendChild(links);
+      cont.appendChild(card);
+    });
+  }).catch(function(){});
+})();
+</script>
 </body>
 </html>
