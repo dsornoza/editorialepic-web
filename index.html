@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EPICEC — Ediciones, Publicaciones e Investigaciones Científicas</title>
+<meta name="description" content="EPICEC S.A.S. — Editorial académica ecuatoriana. Coedición de libros y revistas científicas con rumbo a indexación Latindex y Scopus.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --surface-100:#fbf9f6;
+    --surface-200:#f1ece3;
+    --surface-300:#e7e0d2;
+    --border:#ddd5c7;
+    --ink:#1c1a17;
+    --ink-secondary:#5c5548;
+    --primary:#1b3a5c;
+    --primary-hover:#14293f;
+    --accent:#a85a22;
+    --radius-md:8px;
+    --radius-lg:16px;
+    --font-serif:"Fraunces", Georgia, serif;
+    --font-sans:"Inter", system-ui, -apple-system, sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --surface-100:#14181f;
+      --surface-200:#1d232d;
+      --surface-300:#262e3a;
+      --border:#2a313d;
+      --ink:#f3efe9;
+      --ink-secondary:#b9b2a5;
+      --primary:#8fbeea;
+      --primary-hover:#add1f2;
+      --accent:#e3a15c;
+    }
+  }
+  :root[data-theme="dark"]{
+    --surface-100:#14181f;
+    --surface-200:#1d232d;
+    --surface-300:#262e3a;
+    --border:#2a313d;
+    --ink:#f3efe9;
+    --ink-secondary:#b9b2a5;
+    --primary:#8fbeea;
+    --primary-hover:#add1f2;
+    --accent:#e3a15c;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--surface-100);
+    color:var(--ink);
+    font-family:var(--font-sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{
+    max-width:760px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+  header{
+    padding:56px 0 32px;
+  }
+  .logo{
+    max-width:320px;
+    width:100%;
+    height:auto;
+    display:block;
+  }
+  main{
+    padding-bottom:64px;
+  }
+  h1{
+    font-family:var(--font-serif);
+    font-weight:600;
+    font-size:clamp(28px, 5vw, 40px);
+    line-height:1.15;
+    margin:0 0 8px;
+    color:var(--ink);
+  }
+  .tagline{
+    color:var(--ink-secondary);
+    font-size:16px;
+    margin:0 0 40px;
+  }
+  .lead{
+    font-size:18px;
+    line-height:1.7;
+    color:var(--ink);
+    margin:0 0 24px;
+  }
+  p{
+    font-size:16px;
+    color:var(--ink);
+    margin:0 0 20px;
+  }
+  .tag{
+    display:inline-block;
+    font-family:var(--font-sans);
+    font-weight:600;
+    font-size:12px;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    color:var(--accent);
+    background:var(--surface-200);
+    border-radius:999px;
+    padding:6px 14px;
+    margin-bottom:24px;
+  }
+  .lines{
+    list-style:none;
+    margin:32px 0;
+    padding:0;
+    border-top:1px solid var(--border);
+  }
+  .lines li{
+    display:flex;
+    justify-content:space-between;
+    gap:16px;
+    padding:16px 0;
+    border-bottom:1px solid var(--border);
+    font-size:15px;
+  }
+  .lines .k{
+    color:var(--ink-secondary);
+  }
+  .lines .v{
+    text-align:right;
+    font-weight:500;
+  }
+  .card{
+    background:var(--surface-200);
+    border-radius:var(--radius-lg);
+    padding:32px;
+    margin:40px 0;
+  }
+  .card h2{
+    font-family:var(--font-serif);
+    font-weight:600;
+    font-size:22px;
+    margin:0 0 12px;
+  }
+  .contact{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-top:16px;
+  }
+  .contact a{
+    color:var(--primary);
+    text-decoration:none;
+    font-weight:500;
+  }
+  .contact a:hover{
+    color:var(--primary-hover);
+    text-decoration:underline;
+  }
+  footer{
+    border-top:1px solid var(--border);
+    padding:28px 0 56px;
+    color:var(--ink-secondary);
+    font-size:13px;
+  }
+  footer p{margin:0;font-size:13px;color:var(--ink-secondary);}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <img class="logo" src="logo.png" alt="EPICEC — Ediciones, Publicaciones e Investigaciones Científicas">
+    </header>
+
+    <main>
+      <span class="tag">Editorial académica</span>
+      <h1>Publicamos la investigación que otros apenas citan.</h1>
+      <p class="tagline">EPICEC S.A.S. — Jipijapa, Manabí, Ecuador</p>
+
+      <p class="lead">
+        EPICEC (Ediciones, Publicaciones e Investigaciones Científicas) es una
+        editorial académica ecuatoriana dedicada a la publicación de libros
+        y revistas científicas, con una ruta clara hacia la indexación en
+        Latindex Catálogo 2.0 y, a mediano plazo, Scopus.
+      </p>
+
+      <p>
+        Trabajamos bajo un modelo de coedición con autores e investigadores:
+        acompañamos el proceso editorial completo — edición, diagramación,
+        asignación de ISBN y depósito legal — para que un manuscrito se
+        convierta en un libro publicado y registrado formalmente.
+      </p>
+
+      <p>
+        En paralelo, estamos desarrollando nuestra primera revista
+        científica, con comité editorial internacional y un proceso de
+        arbitraje riguroso desde el primer número.
+      </p>
+
+      <div class="card">
+        <h2>¿Tienes un manuscrito o quieres sumarte al comité editorial?</h2>
+        <p style="margin-bottom:0;">
+          Escríbenos y conversemos sobre tu proyecto editorial o tu interés
+          en participar como revisor o miembro del comité científico.
+        </p>
+        <div class="contact">
+          <a href="mailto:contacto@editorialepic.com">contacto@editorialepic.com</a>
+        </div>
+      </div>
+
+      <ul class="lines">
+        <li><span class="k">Razón social</span><span class="v">EDICIONES, PUBLICACIONES E INVESTIGACIONES CIENTÍFICAS - EPICEC S.A.S.</span></li>
+        <li><span class="k">RUC</span><span class="v">1391940129001</span></li>
+        <li><span class="k">Domicilio</span><span class="v">Jipijapa, Manabí, Ecuador</span></li>
+      </ul>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 EPICEC S.A.S. Todos los derechos reservados.</p>
+    </footer>
+  </div>
+</body>
+</html>
