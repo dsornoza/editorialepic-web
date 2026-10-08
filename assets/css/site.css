@@ -121,7 +121,7 @@ section.marfil{background:var(--marfil);}
   background:var(--azul-tinta);color:var(--marfil);border-radius:var(--radio-lg);padding:34px;
 }
 .precio-caja .cifra{font-family:var(--serif);font-size:clamp(46px,7vw,64px);font-weight:600;color:#fff;line-height:1;}
-.precio-caja .cifra small{font-family:var(--sans);font-size:16px;font-weight:500;color:#C9D1E0;margin-left:6px;}
+.precio-caja .cifra small{display:block;font-family:var(--sans);font-size:16px;font-weight:500;color:#C9D1E0;margin:10px 0 0;}
 .precio-caja p{color:#D6DCE8;font-size:15px;margin:14px 0 0;}
 .lista{list-style:none;margin:0 0 20px;padding:0;}
 .lista li{position:relative;padding:7px 0 7px 28px;font-size:15px;}
