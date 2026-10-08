@@ -3,330 +3,180 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>EPICEC — Ediciones, Publicaciones e Investigaciones Científicas</title>
-<meta name="description" content="EPICEC S.A.S. — Editorial académica ecuatoriana. Publicación de libros académicos y científicos de acceso abierto, con ISBN y DOI.">
+<title>EPIC | Editorial académica de acceso abierto</title>
+<meta name="description" content="EPIC es una editorial ecuatoriana de libros académicos y científicos de acceso abierto, con revisión por pares, ISBN y DOI para cada obra.">
+<link rel="canonical" href="https://editorialepic.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EPIC">
+<meta property="og:locale" content="es_EC">
+<meta property="og:title" content="EPIC | Editorial académica de acceso abierto">
+<meta property="og:description" content="EPIC es una editorial ecuatoriana de libros académicos y científicos de acceso abierto, con revisión por pares, ISBN y DOI para cada obra.">
+<meta property="og:url" content="https://editorialepic.com/">
+<meta property="og:image" content="https://editorialepic.com/assets/img/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="EPIC | Editorial académica de acceso abierto">
+<meta name="twitter:description" content="EPIC es una editorial ecuatoriana de libros académicos y científicos de acceso abierto, con revisión por pares, ISBN y DOI para cada obra.">
+<meta name="twitter:image" content="https://editorialepic.com/assets/img/og-image.png">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --surface-100:#fbf9f6;
-    --surface-200:#f1ece3;
-    --surface-300:#e7e0d2;
-    --border:#ddd5c7;
-    --ink:#1c1a17;
-    --ink-secondary:#5c5548;
-    --primary:#1b3a5c;
-    --primary-hover:#14293f;
-    --on-primary:#ffffff;
-    --hero-bg:#1b3a5c;
-    --hero-ink:#f6f2ea;
-    --hero-ink-2:#c9d4e2;
-    --accent:#a85a22;
-    --radius-md:8px;
-    --radius-lg:16px;
-    --font-serif:"Fraunces", Georgia, serif;
-    --font-sans:"Inter", system-ui, -apple-system, sans-serif;
-  }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;scroll-padding-top:72px;}
-  html,body{margin:0;padding:0;}
-  body{
-    background:var(--surface-100);
-    color:var(--ink);
-    font-family:var(--font-sans);
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-  }
-  a{color:var(--primary);}
-  .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
-  h1,h2,h3{font-family:var(--font-serif);font-weight:600;line-height:1.15;margin:0;}
-  p{margin:0 0 16px;}
-
-  /* Navegación */
-  .nav{
-    position:sticky;top:0;z-index:10;
-    background:var(--surface-100);
-    border-bottom:1px solid var(--border);
-  }
-  .nav .wrap{
-    display:flex;align-items:center;justify-content:space-between;
-    gap:16px;flex-wrap:wrap;padding-top:12px;padding-bottom:12px;
-  }
-  .nav img{height:44px;width:auto;display:block;}
-  .nav ul{
-    list-style:none;margin:0;padding:0;
-    display:flex;flex-wrap:wrap;gap:4px 22px;
-  }
-  .nav ul a{
-    color:var(--ink-secondary);text-decoration:none;
-    font-size:14px;font-weight:500;
-  }
-  .nav ul a:hover{color:var(--primary);}
-
-  /* Hero */
-  .hero{background:var(--hero-bg);color:var(--hero-ink);}
-  .hero .wrap{padding-top:88px;padding-bottom:88px;}
-  .eyebrow{
-    display:inline-block;font-size:12px;font-weight:600;
-    letter-spacing:.06em;text-transform:uppercase;
-    color:var(--accent);margin-bottom:16px;
-  }
-  .hero .eyebrow{color:#e8b27d;}
-  .hero h1{
-    font-size:clamp(32px,6vw,56px);max-width:18ch;margin-bottom:20px;
-  }
-  .hero p{
-    font-size:18px;max-width:58ch;color:var(--hero-ink-2);margin-bottom:32px;
-  }
-  .btns{display:flex;flex-wrap:wrap;gap:12px;}
-  .btn{
-    display:inline-block;padding:12px 22px;border-radius:var(--radius-md);
-    font-weight:600;font-size:15px;text-decoration:none;
-    border:1px solid transparent;
-  }
-  .btn-light{background:#f6f2ea;color:#1b3a5c;}
-  .btn-light:hover{background:#fff;}
-  .btn-ghost{border-color:rgba(246,242,234,.5);color:#f6f2ea;}
-  .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.08);}
-  .btn-solid{background:var(--primary);color:var(--on-primary);}
-  .btn-solid:hover{background:var(--primary-hover);}
-
-  /* Secciones */
-  section{padding:72px 0;}
-  section.alt{background:var(--surface-200);}
-  .head{max-width:640px;margin-bottom:40px;}
-  .head h2{font-size:clamp(26px,4vw,36px);margin-bottom:12px;}
-  .head p{color:var(--ink-secondary);font-size:17px;margin:0;}
-
-  .about{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:start;}
-  .about p{font-size:17px;}
-  .facts{
-    list-style:none;margin:0;padding:0;
-    border-top:1px solid var(--border);
-  }
-  .facts li{
-    display:flex;justify-content:space-between;gap:16px;
-    padding:14px 0;border-bottom:1px solid var(--border);font-size:15px;
-  }
-  .facts .k{color:var(--ink-secondary);}
-  .facts .v{text-align:right;font-weight:500;}
-
-  .grid{display:grid;gap:20px;}
-  .g3{grid-template-columns:repeat(3,1fr);}
-  .g2{grid-template-columns:repeat(2,1fr);}
-  .box{
-    background:var(--surface-100);border:1px solid var(--border);
-    border-radius:var(--radius-lg);padding:28px;
-  }
-  .alt .box{background:var(--surface-100);}
-  .box h3{font-size:20px;margin-bottom:10px;}
-  .box p{color:var(--ink-secondary);font-size:15px;margin:0;}
-  .num{
-    display:inline-flex;align-items:center;justify-content:center;
-    width:36px;height:36px;border-radius:50%;
-    background:var(--primary);color:var(--on-primary);
-    font-weight:600;font-size:15px;margin-bottom:16px;
-  }
-
-  /* Catálogo (marcadores) */
-  .book{
-    background:var(--surface-200);border:1px dashed var(--border);
-    border-radius:var(--radius-lg);padding:20px;
-  }
-  .cover{
-    aspect-ratio:3/4;border-radius:var(--radius-md);
-    background:var(--surface-300);
-    display:flex;align-items:center;justify-content:center;
-    color:var(--ink-secondary);font-family:var(--font-serif);font-size:18px;
-    margin-bottom:14px;
-  }
-  .book h3{font-size:16px;margin-bottom:4px;}
-  .book p{font-size:14px;color:var(--ink-secondary);margin:0;}
-
-  .oa{
-    display:inline-flex;align-items:center;gap:8px;
-    font-size:13px;font-weight:600;color:#f6f2ea;
-    border:1px solid rgba(246,242,234,.4);border-radius:999px;
-    padding:6px 14px;margin-bottom:20px;
-  }
-  .oa::before{content:"";width:8px;height:8px;border-radius:50%;background:#e8b27d;}
-  .book.real{border-style:solid;display:flex;flex-direction:column;}
-  .book.real img{
-    width:100%;aspect-ratio:3/4;object-fit:cover;display:block;
-    border-radius:var(--radius-md);margin-bottom:14px;background:var(--surface-300);
-  }
-  .book.real .meta{flex:1;margin-bottom:14px;}
-  .book.real .links{display:flex;flex-wrap:wrap;gap:8px;}
-  .book.real .links a{
-    font-size:13px;font-weight:600;text-decoration:none;
-    padding:8px 14px;border-radius:var(--radius-md);
-    border:1px solid var(--primary);color:var(--primary);
-  }
-  .book.real .links a.main{background:var(--primary);color:var(--on-primary);}
-  .cta{text-align:center;}
-  .cta .head{margin:0 auto 28px;}
-  .cta .mail{
-    display:inline-block;font-family:var(--font-serif);font-weight:600;
-    font-size:clamp(22px,4vw,30px);color:var(--primary);
-    text-decoration:none;margin-bottom:24px;
-  }
-  .cta .mail:hover{text-decoration:underline;}
-
-  footer{background:var(--hero-bg);color:var(--hero-ink-2);font-size:14px;}
-  footer .wrap{
-    display:grid;grid-template-columns:1.4fr 1fr;gap:32px;
-    padding-top:48px;padding-bottom:40px;
-  }
-  footer h4{
-    font-family:var(--font-sans);font-size:12px;letter-spacing:.06em;
-    text-transform:uppercase;color:#e8b27d;margin:0 0 10px;
-  }
-  footer p{margin:0 0 6px;font-size:14px;}
-  footer a{color:#f6f2ea;}
-  .legal{
-    border-top:1px solid rgba(255,255,255,.12);
-    padding:18px 0;font-size:13px;
-  }
-  .legal .wrap{display:block;padding-top:0;padding-bottom:0;}
-
-  @media (max-width:820px){
-    .about,footer .wrap{grid-template-columns:1fr;}
-    .g3{grid-template-columns:1fr 1fr;}
-    section{padding:56px 0;}
-    .hero .wrap{padding-top:64px;padding-bottom:64px;}
-  }
-  @media (max-width:560px){
-    .g3,.g2{grid-template-columns:1fr;}
-    .nav ul{gap:4px 16px;}
-  }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/site.css">
 </head>
 <body>
-
-<nav class="nav">
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<nav class="nav" aria-label="Principal">
   <div class="wrap">
-    <a href="#inicio"><img src="logo.png" alt="EPICEC"></a>
+    <a class="marca" href="/"><img src="/assets/img/logo-color.png" alt="EPIC, Ediciones, Publicaciones e Investigaciones Científicas" width="900" height="288"></a>
     <ul>
-      <li><a href="#nosotros">Nosotros</a></li>
-      <li><a href="#servicios">Servicios</a></li>
-      <li><a href="#coedicion">Proceso</a></li>
-      <!-- CATÁLOGO OCULTO: descomentar al publicar el primer libro
-      <li><a href="#catalogo">Catálogo</a></li>
-      -->
-      <li><a href="#contacto">Contacto</a></li>
+      <li><a href="/#nosotros">Nosotros</a></li>
+      <li><a href="/#servicios">Servicios</a></li>
+      <li><a href="/#coedicion">Proceso</a></li>
+      <li><a href="/politicas-editoriales/">Políticas</a></li>
+      <li><a href="/consejo-editorial/">Consejo Editorial</a></li>
+      <li><a href="/#contacto">Contacto</a></li>
     </ul>
   </div>
 </nav>
 
+<main id="contenido">
+
 <header class="hero" id="inicio">
   <div class="wrap">
-    <span class="eyebrow">Editorial académica · Ecuador</span><br>
-    <span class="oa">Todas nuestras publicaciones son de acceso abierto</span>
+    <span class="insignia">Todas nuestras publicaciones son de acceso abierto</span>
+    <span class="eyebrow" style="display:block;">Editorial académica · Ecuador</span>
     <h1>Tu investigación merece ser publicada.</h1>
-    <p>
-      EPICEC es una editorial ecuatoriana de libros académicos y científicos,
-      de acceso abierto, con ISBN y DOI para cada obra.
-    </p>
+    <p>EPIC es una editorial ecuatoriana de libros académicos y científicos de acceso abierto, con revisión por pares, ISBN y DOI para cada obra.</p>
     <div class="btns">
-      <a class="btn btn-light" href="#contacto">Envía tu manuscrito</a>
+      <a class="btn btn-ambar" href="mailto:contacto@editorialepic.com?subject=Propuesta%20de%20manuscrito">Envía tu manuscrito</a>
       <a class="btn btn-ghost" href="#coedicion">Cómo publicar con nosotros</a>
     </div>
+    <p class="apunte">Paquete único de USD 500 · Publicación en 30 a 45 días desde el manuscrito completo</p>
   </div>
 </header>
 
-<section id="nosotros">
-  <div class="wrap about">
+<section id="nosotros" aria-labelledby="t-nosotros">
+  <div class="wrap dos">
     <div>
       <span class="eyebrow">Nosotros</span>
-      <h2 style="font-size:clamp(26px,4vw,36px);margin-bottom:20px;">Una editorial hecha desde la academia</h2>
-      <p>
-        EPICEC (Ediciones, Publicaciones e Investigaciones Científicas) es una
-        editorial académica ecuatoriana que ofrece a investigadores y
-        docentes una vía profesional y transparente de publicación.
-      </p>
-      <p>
-        Acompañamos el proceso completo: desde el manuscrito hasta un libro
-        publicado y registrado formalmente.
-      </p>
+      <h2 id="t-nosotros" style="font-size:clamp(27px,4vw,38px);margin-bottom:20px;">Una editorial hecha desde la academia</h2>
+      <p>EPIC (Ediciones, Publicaciones e Investigaciones Científicas) es una editorial académica ecuatoriana que ofrece a investigadores y docentes una vía profesional y transparente de publicación.</p>
+      <p>Acompañamos el proceso completo: desde el manuscrito hasta un libro publicado y registrado formalmente.</p>
     </div>
-    <div class="grid" style="gap:20px;">
-      <div class="box"><h3>Misión</h3><p>Difundir el conocimiento científico y académico mediante libros de acceso abierto, con rigor editorial, revisión por pares y registro formal con ISBN y DOI.</p></div>
-      <div class="box"><h3>Visión</h3><p>Ser una editorial académica ecuatoriana de referencia por la calidad, la visibilidad y el alcance de sus publicaciones.</p></div>
+    <div class="grid">
+      <div class="caja" style="background:var(--marfil);border-color:transparent;"><h3>Misión</h3><p>Difundir el conocimiento científico y académico mediante libros de acceso abierto, con rigor editorial, revisión por pares y registro formal con ISBN y DOI.</p></div>
+      <div class="caja" style="background:var(--marfil);border-color:transparent;"><h3>Visión</h3><p>Ser una editorial académica ecuatoriana de referencia por la calidad, la visibilidad y el alcance de sus publicaciones.</p></div>
     </div>
   </div>
 </section>
 
-<section class="alt" id="servicios">
+<section class="marfil" id="servicios" aria-labelledby="t-servicios">
   <div class="wrap">
     <div class="head">
       <span class="eyebrow">Servicios</span>
-      <h2>Lo que hacemos por tu obra</h2>
+      <h2 id="t-servicios">Lo que hacemos por tu obra</h2>
       <p>Un servicio editorial integral, con criterios académicos.</p>
     </div>
     <div class="grid g3">
-      <div class="box"><h3>Edición y corrección</h3><p>Revisión de estilo y de forma para que el texto esté a la altura de la investigación.</p></div>
-      <div class="box"><h3>Diagramación</h3><p>Maquetación profesional de interiores y diseño de portada.</p></div>
-      <div class="box"><h3>ISBN y depósito legal</h3><p>Asignación de ISBN y depósito legal para que tu libro quede registrado formalmente.</p></div>
-      <div class="box"><h3>Revisión por pares</h3><p>Evaluación por pares con metodología de doble par ciego, para garantizar la calidad e imparcialidad de cada obra.</p></div>
-      <div class="box"><h3>Libros</h3><p>Monografías, libros de investigación y textos académicos en formato digital e impreso.</p></div>
-      <div class="box"><h3>Libros colectivos y actas</h3><p>Compilaciones de capítulos de varios autores y memorias de congresos, con coordinación editorial.</p></div>
+      <div class="caja"><h3>Revisión por pares</h3><p>Evaluación por dos pares externos anónimos, con metodología de doble ciego, para garantizar la calidad e imparcialidad de cada obra. Recibes los informes y un certificado de revisión verificable.</p><a class="mas" href="/politicas-editoriales/#revision">Ver política →</a></div>
+      <div class="caja"><h3>Control antiplagio</h3><p>Verificamos la originalidad del manuscrito antes de enviarlo a revisión.</p></div>
+      <div class="caja"><h3>Corrección básica</h3><p>Una ronda de revisión de ortografía, gramática y puntuación sobre el manuscrito aprobado.</p></div>
+      <div class="caja"><h3>Diagramación y portada</h3><p>Maquetación profesional del interior y diseño de portada.</p></div>
+      <div class="caja"><h3>ISBN, DOI y registro de derechos</h3><p>Gestionamos el ISBN, el DOI (a través de Zenodo) y el registro de derechos de autor en SENADI.</p></div>
+      <div class="caja"><h3>Publicación en acceso abierto</h3><p>Tu libro se publica en la web de EPIC y en Zenodo, y recibe una carta de aceptación y un certificado con código QR de verificación.</p></div>
     </div>
   </div>
 </section>
 
-<section id="coedicion">
+<section id="precio" aria-labelledby="t-precio">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">Precio y condiciones</span>
+      <h2 id="t-precio">Un paquete, todo el proceso</h2>
+    </div>
+    <div class="precio">
+      <div class="precio-caja">
+        <div class="cifra">USD 500<small>por título</small></div>
+        <p>Paquete único, precio final, sin descuentos.</p>
+        <p>Pago por transferencia bancaria a la cuenta de la compañía, con factura electrónica.</p>
+      </div>
+      <div>
+        <h3>Incluye</h3>
+        <ul class="lista">
+          <li>Evaluación preliminar y revisión por pares doble ciego con dos pares externos</li>
+          <li>Control antiplagio</li>
+          <li>Corrección básica del texto (una ronda)</li>
+          <li>Diagramación y diseño de portada</li>
+          <li>ISBN, código de barras, DOI y registro de derechos de autor en SENADI</li>
+          <li>Versión digital en acceso abierto, publicada en la web de EPIC y en Zenodo</li>
+          <li>Carta de aceptación, certificado de arbitraje y carta de publicación</li>
+        </ul>
+        <h3>No incluye</h3>
+        <ul class="lista no">
+          <li>Traducción</li>
+          <li>Corrección de estilo profunda ni segunda ronda de corrección</li>
+          <li>Distribución en librerías o ferias, ni envío de ejemplares físicos</li>
+          <li>Impresión (por ahora no la ofrecemos)</li>
+        </ul>
+        <p>Si el arbitraje no recomienda publicar la obra, el servicio no se completa y el costo para el autor se limita a un costo único de procesamiento de USD 40.</p>
+        <p><a class="enlace-flecha" href="/politicas-editoriales/#tarifa">Consulta las condiciones del servicio →</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="marfil" id="coedicion" aria-labelledby="t-proceso">
   <div class="wrap">
     <div class="head">
       <span class="eyebrow">Proceso editorial</span>
-      <h2>Te acompañamos de principio a fin</h2>
+      <h2 id="t-proceso">Te acompañamos de principio a fin</h2>
       <p>Del manuscrito a la obra publicada, con el apoyo de nuestro equipo editorial.</p>
     </div>
-    <div class="grid g3">
-      <div class="box"><span class="num">1</span><h3>Envío del manuscrito</h3><p>Nos escribes con tu propuesta y la evaluamos editorialmente.</p></div>
-      <div class="box"><span class="num">2</span><h3>Edición y revisión</h3><p>Trabajamos contigo el texto, la revisión por pares y la maquetación.</p></div>
-      <div class="box"><span class="num">3</span><h3>Publicación y registro</h3><p>Tu obra se publica con ISBN y DOI y se difunde en acceso abierto.</p></div>
+    <div class="grid g2">
+      <div class="caja"><span class="num">1</span><h3>Envío del manuscrito</h3><p>Nos escribes con tu propuesta y la evaluamos editorialmente.</p></div>
+      <div class="caja"><span class="num">2</span><h3>Revisión inicial</h3><p>Revisamos el formato y la originalidad del texto.</p></div>
+      <div class="caja"><span class="num">3</span><h3>Revisión por pares y correcciones</h3><p>Dos pares externos evalúan tu obra y trabajamos contigo las correcciones.</p></div>
+      <div class="caja"><span class="num">4</span><h3>Publicación y registro</h3><p>Tu obra se publica con ISBN y DOI, en acceso abierto.</p></div>
     </div>
+    <p class="nota">Plazo estimado: 30 a 45 días desde la entrega del manuscrito completo. Depende también de los tiempos de los revisores.</p>
+    <p><a class="enlace-flecha" href="/politicas-editoriales/">Conoce el proceso completo y nuestras políticas →</a></p>
   </div>
 </section>
 
-<!-- CATÁLOGO OCULTO: descomentar al publicar el primer libro (y el enlace del menú)
-<section class="alt" id="catalogo">
-  <div class="wrap">
-    <div class="head">
-      <span class="eyebrow">Catálogo · Acceso abierto</span>
-      <h2>Libros publicados</h2>
-      <p>Todos nuestros libros son de acceso abierto: puedes leerlos y descargarlos sin costo. Cada obra cuenta con su propio ISBN y DOI.</p>
-    </div>
-    <div class="grid g3" id="libros">
-      <div class="book"><div class="cover">Próximamente</div><h3>Título por anunciar</h3><p>EPICEC · 2026</p></div>
-      <div class="book"><div class="cover">Próximamente</div><h3>Título por anunciar</h3><p>EPICEC · 2026</p></div>
-      <div class="book"><div class="cover">Próximamente</div><h3>Título por anunciar</h3><p>EPICEC · 2026</p></div>
-    </div>
-  </div>
-</section>
--->
-
-<section class="alt cta" id="contacto">
+<section class="centro" id="contacto" aria-labelledby="t-contacto">
   <div class="wrap">
     <div class="head">
       <span class="eyebrow">Contacto</span>
-      <h2>¿Tienes un manuscrito o una idea?</h2>
+      <h2 id="t-contacto">¿Tienes un manuscrito o una idea?</h2>
       <p>Cuéntanos sobre tu proyecto editorial.</p>
     </div>
-    <a class="mail" href="mailto:contacto@editorialepic.com">contacto@editorialepic.com</a>
+    <a class="correo" href="mailto:contacto@editorialepic.com">contacto@editorialepic.com</a>
     <div class="btns" style="justify-content:center;">
-      <a class="btn btn-solid" href="mailto:contacto@editorialepic.com?subject=Propuesta%20editorial">Escribir ahora</a>
+      <a class="btn btn-tinta" href="mailto:contacto@editorialepic.com?subject=Propuesta%20de%20manuscrito">Envía tu manuscrito</a>
     </div>
   </div>
 </section>
 
-<footer>
+</main>
+<footer class="pie">
   <div class="wrap">
     <div>
-      <h4>EPICEC S.A.S.</h4>
-      <p>Ediciones, Publicaciones e Investigaciones Científicas</p>
-      <p>RUC 1391940129001</p>
+      <img src="/assets/img/logo-blanco.png" alt="EPIC, Ediciones, Publicaciones e Investigaciones Científicas" width="900" height="290">
+      <p>EPICEC S.A.S. · Ediciones, Publicaciones e Investigaciones Científicas</p>
+      <p>RUC 1391940129001 · Ecuador</p>
+    </div>
+    <div>
+      <h4>Documentos</h4>
+      <ul>
+        <li><a href="/politicas-editoriales/">Políticas editoriales</a></li>
+        <li><a href="/politicas-editoriales/#tarifa">Condiciones del servicio</a></li>
+        <li><a href="/politicas-editoriales/#revision">Política de revisión por pares</a></li>
+        <li><a href="/politicas-editoriales/#quejas">Quejas y datos personales</a></li>
+        <li><a href="/consejo-editorial/">Consejo Editorial</a></li>
+        <li><a href="/verificar/">Verificar certificado</a></li>
+      </ul>
     </div>
     <div>
       <h4>Contacto</h4>
@@ -335,45 +185,5 @@
   </div>
   <div class="legal"><div class="wrap">&copy; 2026 EPICEC S.A.S. Todos los derechos reservados.</div></div>
 </footer>
-
-<script>
-(function(){
-  var cont=document.getElementById("libros");
-  if(!cont) return;
-  fetch("libros.json",{cache:"no-cache"}).then(function(r){return r.json();}).then(function(data){
-    var libros=(data&&data.libros)||[];
-    if(!libros.length) return;
-    cont.textContent="";
-    libros.forEach(function(l){
-      var card=document.createElement("article");
-      card.className="book real";
-      if(l.portada){
-        var img=document.createElement("img");
-        img.src=l.portada; img.alt="Portada de "+l.titulo; img.loading="lazy";
-        card.appendChild(img);
-      }
-      var meta=document.createElement("div"); meta.className="meta";
-      var h=document.createElement("h3"); h.textContent=l.titulo; meta.appendChild(h);
-      var p=document.createElement("p");
-      p.textContent=[(l.autores||[]).join(", "),l.anio].filter(Boolean).join(" · ");
-      meta.appendChild(p);
-      if(l.isbn){var i=document.createElement("p"); i.textContent="ISBN "+l.isbn; meta.appendChild(i);}
-      card.appendChild(meta);
-      var links=document.createElement("div"); links.className="links";
-      function add(txt,href,main){
-        if(!href) return;
-        var a=document.createElement("a"); a.href=href; a.textContent=txt;
-        a.target="_blank"; a.rel="noopener";
-        if(main) a.className="main";
-        links.appendChild(a);
-      }
-      add("Leer / descargar",l.zenodo,true);
-      if(l.doi) add("DOI","https://doi.org/"+l.doi,false);
-      card.appendChild(links);
-      cont.appendChild(card);
-    });
-  }).catch(function(){});
-})();
-</script>
 </body>
 </html>
