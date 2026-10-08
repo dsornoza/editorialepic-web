@@ -17,3 +17,6 @@
 *.log
 *.tmp
 node_modules/
+
+# Archivos fuente del logo (no se publican)
+_fuente/
