@@ -1,0 +1,14 @@
+{
+  "_estructura": {
+    "id": "Código único que lleva el QR, por ejemplo EPIC-2026-0001",
+    "titulo": "Título de la obra",
+    "autores": [
+      "Nombre Apellido"
+    ],
+    "fecha": "AAAA-MM-DD",
+    "isbn": "ISBN de la obra",
+    "doi": "DOI de la obra",
+    "tipo": "Carta de aceptación | Certificado de arbitraje | Carta de publicación | Certificado de revisión por pares"
+  },
+  "certificados": []
+}

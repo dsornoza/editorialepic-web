@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verificar certificado | EPIC</title>
+<meta name="description" content="Comprueba la autenticidad de un certificado o una carta emitidos por EPIC con su código de verificación.">
+<link rel="canonical" href="https://editorialepic.com/verificar/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EPIC">
+<meta property="og:locale" content="es_EC">
+<meta property="og:title" content="Verificar certificado | EPIC">
+<meta property="og:description" content="Comprueba la autenticidad de un certificado o una carta emitidos por EPIC con su código de verificación.">
+<meta property="og:url" content="https://editorialepic.com/verificar/">
+<meta property="og:image" content="https://editorialepic.com/assets/img/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Verificar certificado | EPIC">
+<meta name="twitter:description" content="Comprueba la autenticidad de un certificado o una carta emitidos por EPIC con su código de verificación.">
+<meta name="twitter:image" content="https://editorialepic.com/assets/img/og-image.png">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/site.css">
+</head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<nav class="nav" aria-label="Principal">
+  <div class="wrap">
+    <a class="marca" href="/"><img src="/assets/img/logo-color.png" alt="EPIC, Ediciones, Publicaciones e Investigaciones Científicas" width="900" height="288"></a>
+    <ul>
+      <li><a href="/#nosotros">Nosotros</a></li>
+      <li><a href="/#servicios">Servicios</a></li>
+      <li><a href="/#coedicion">Proceso</a></li>
+      <li><a href="/politicas-editoriales/">Políticas</a></li>
+      <li><a href="/consejo-editorial/">Consejo Editorial</a></li>
+      <li><a href="/#contacto">Contacto</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="contenido">
+  <header class="cabecera">
+    <div class="wrap">
+      <h1>Verificar certificado</h1>
+      <p class="entradilla">Comprueba la autenticidad de un certificado o una carta emitidos por EPIC. Escribe el código de verificación o escanea el código QR del documento.</p>
+    </div>
+  </header>
+  <div class="doc">
+    <div class="texto">
+      <form class="buscador" id="form" role="search" aria-label="Verificar certificado">
+        <label for="codigo" style="flex-basis:100%;font-size:14px;color:var(--pizarra);">Código de verificación</label>
+        <input id="codigo" name="id" type="text" autocomplete="off" spellcheck="false" placeholder="Código de verificación">
+        <button class="btn btn-tinta" type="submit">Verificar</button>
+      </form>
+      <div id="resultado" aria-live="polite"></div>
+    </div>
+  </div>
+</main>
+<script>
+(function () {
+  var res = document.getElementById("resultado");
+  var inp = document.getElementById("codigo");
+  var campos = [["Título", "titulo"], ["Autores", "autores"], ["Fecha", "fecha"], ["Tipo", "tipo"], ["ISBN", "isbn"], ["DOI", "doi"]];
+  function limpiar() { while (res.firstChild) res.removeChild(res.firstChild); }
+  function mensaje(clase, titulo, texto) {
+    limpiar();
+    var d = document.createElement("div"); d.className = "cert " + clase;
+    var h = document.createElement("h2"); h.style.fontSize = "22px"; h.textContent = titulo; d.appendChild(h);
+    if (texto) { var p = document.createElement("p"); p.style.margin = "8px 0 0"; p.textContent = texto; d.appendChild(p); }
+    res.appendChild(d); return d;
+  }
+  function buscar(id) {
+    id = (id || "").trim();
+    if (!id) { limpiar(); return; }
+    fetch("/certificados.json", { cache: "no-cache" })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        var lista = (data && data.certificados) || [];
+        var c = lista.filter(function (x) { return String(x.id).toLowerCase() === id.toLowerCase(); })[0];
+        if (!c) { mensaje("invalido", "No encontrado", "No existe un documento con el código «" + id + "». Revisa que esté bien escrito o escríbenos a contacto@editorialepic.com."); return; }
+        var d = mensaje("valido", "Documento válido", "Código " + c.id);
+        var dl = document.createElement("dl");
+        campos.forEach(function (f) {
+          var v = c[f[1]]; if (Array.isArray(v)) v = v.join(", ");
+          if (!v) return;
+          var dt = document.createElement("dt"); dt.textContent = f[0];
+          var dd = document.createElement("dd"); dd.textContent = v;
+          dl.appendChild(dt); dl.appendChild(dd);
+        });
+        d.appendChild(dl);
+      })
+      .catch(function () { mensaje("invalido", "No se pudo consultar", "Inténtalo de nuevo en unos minutos."); });
+  }
+  document.getElementById("form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var id = inp.value.trim();
+    history.replaceState(null, "", id ? "?id=" + encodeURIComponent(id) : location.pathname);
+    buscar(id);
+  });
+  var q = new URLSearchParams(location.search).get("id");
+  if (q) { inp.value = q; buscar(q); }
+})();
+</script>
+<footer class="pie">
+  <div class="wrap">
+    <div>
+      <img src="/assets/img/logo-blanco.png" alt="EPIC, Ediciones, Publicaciones e Investigaciones Científicas" width="900" height="290">
+      <p>EPICEC S.A.S. · Ediciones, Publicaciones e Investigaciones Científicas</p>
+      <p>RUC 1391940129001 · Ecuador</p>
+    </div>
+    <div>
+      <h4>Documentos</h4>
+      <ul>
+        <li><a href="/politicas-editoriales/">Políticas editoriales</a></li>
+        <li><a href="/politicas-editoriales/#tarifa">Condiciones del servicio</a></li>
+        <li><a href="/politicas-editoriales/#revision">Política de revisión por pares</a></li>
+        <li><a href="/politicas-editoriales/#quejas">Quejas y datos personales</a></li>
+        <li><a href="/consejo-editorial/">Consejo Editorial</a></li>
+        <li><a href="/verificar/">Verificar certificado</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contacto</h4>
+      <p><a href="mailto:contacto@editorialepic.com">contacto@editorialepic.com</a></p>
+    </div>
+  </div>
+  <div class="legal"><div class="wrap">&copy; 2026 EPICEC S.A.S. Todos los derechos reservados.</div></div>
+</footer>
+</body>
+</html>
