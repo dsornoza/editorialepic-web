@@ -1,7 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://editorialepic.com/</loc><lastmod>2026-10-09</lastmod></url>
-  <url><loc>https://editorialepic.com/politicas-editoriales/</loc><lastmod>2026-10-09</lastmod></url>
-  <url><loc>https://editorialepic.com/consejo-editorial/</loc><lastmod>2026-10-10</lastmod></url>
-  <url><loc>https://editorialepic.com/verificar/</loc><lastmod>2026-10-09</lastmod></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url><loc>https://editorialepic.com/</loc><lastmod>2026-10-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://editorialepic.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://editorialepic.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://editorialepic.com/"/>
+  </url>
+  <url><loc>https://editorialepic.com/en/</loc><lastmod>2026-10-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://editorialepic.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://editorialepic.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://editorialepic.com/"/>
+  </url>
+  <url><loc>https://editorialepic.com/politicas-editoriales/</loc><lastmod>2026-10-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://editorialepic.com/politicas-editoriales/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://editorialepic.com/en/editorial-policies/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://editorialepic.com/politicas-editoriales/"/>
+  </url>
+  <url><loc>https://editorialepic.com/en/editorial-policies/</loc><lastmod>2026-10-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://editorialepic.com/politicas-editoriales/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://editorialepic.com/en/editorial-policies/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://editorialepic.com/politicas-editoriales/"/>
+  </url>
+  <url><loc>https://editorialepic.com/consejo-editorial/</loc><lastmod>2026-10-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://editorialepic.com/consejo-editorial/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://editorialepic.com/en/editorial-board/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://editorialepic.com/consejo-editorial/"/>
+  </url>
+  <url><loc>https://editorialepic.com/en/editorial-board/</loc><lastmod>2026-10-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://editorialepic.com/consejo-editorial/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://editorialepic.com/en/editorial-board/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://editorialepic.com/consejo-editorial/"/>
+  </url>
+  <url><loc>https://editorialepic.com/verificar/</loc><lastmod>2026-10-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://editorialepic.com/verificar/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://editorialepic.com/en/verify/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://editorialepic.com/verificar/"/>
+  </url>
+  <url><loc>https://editorialepic.com/en/verify/</loc><lastmod>2026-10-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://editorialepic.com/verificar/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://editorialepic.com/en/verify/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://editorialepic.com/verificar/"/>
+  </url>
 </urlset>
