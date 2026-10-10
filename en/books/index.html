@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Books | EPIC</title>
+<meta name="description" content="Catalog of open-access academic books published by EPIC.">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://editorialepic.com/en/books/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EPIC">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Books | EPIC">
+<meta property="og:description" content="Catalog of open-access academic books published by EPIC.">
+<meta property="og:url" content="https://editorialepic.com/en/books/">
+<meta property="og:image" content="https://editorialepic.com/assets/img/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Books | EPIC">
+<meta name="twitter:description" content="Catalog of open-access academic books published by EPIC.">
+<meta name="twitter:image" content="https://editorialepic.com/assets/img/og-image.png">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/site.css">
+</head>
+<body>
+<a class="saltar" href="#contenido">Skip to content</a>
+<nav class="nav" aria-label="Main">
+  <div class="wrap">
+    <a class="marca" href="/en/"><img src="/assets/img/logo-color.png" alt="EPIC, Ediciones, Publicaciones e Investigaciones Científicas" width="900" height="288"></a>
+    <ul>
+      <li><a href="/en/#about">About</a></li>
+      <li><a href="/en/#services">Services</a></li>
+      <li><a href="/en/#process">Process</a></li>
+      <li><a href="/en/editorial-policies/">Policies</a></li>
+      <li><a href="/en/editorial-board/">Editorial Board</a></li>
+      <li><a href="/en/#contact">Contact</a></li>
+      <li class="idioma"><a href="/libros/" hreflang="es" lang="es" aria-label="Español">ES</a><span aria-label="English (current language)">EN</span></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="contenido">
+  <header class="cabecera">
+    <div class="wrap">
+      <h1>Books</h1>
+      <p class="entradilla">Open-access academic and scientific books: you can read and download them free of charge. Each work has its own ISBN and DOI.</p>
+    </div>
+  </header>
+  <div class="doc">
+    <p id="vacio" class="estado-vacio" style="max-width:70ch;">We will soon publish our first titles.</p>
+    <div class="grid g3" id="libros"></div>
+  </div>
+</main>
+<script>
+(function () {
+  var cont = document.getElementById("libros");
+  fetch("/libros.json", { cache: "no-cache" }).then(function (r) { return r.json(); }).then(function (data) {
+    var libros = (data && data.libros) || [];
+    if (!libros.length) return;
+    document.getElementById("vacio").remove();
+    libros.forEach(function (l) {
+      var card = document.createElement("article"); card.className = "libro";
+      if (l.portada) { var im = document.createElement("img"); im.src = l.portada; im.alt = "Cover of " + l.titulo; im.loading = "lazy"; card.appendChild(im); }
+      var h = document.createElement("h3"); h.textContent = l.titulo; card.appendChild(h);
+      var p = document.createElement("p"); p.textContent = [(l.autores || []).join(", "), l.anio].filter(Boolean).join(" · "); card.appendChild(p);
+      if (l.isbn) { var i = document.createElement("p"); i.textContent = "ISBN " + l.isbn; card.appendChild(i); }
+      var ac = document.createElement("div"); ac.className = "acciones";
+      function add(t, href, main) { if (!href) return; var a = document.createElement("a"); a.href = href; a.textContent = t; a.className = "btn " + (main ? "btn-tinta" : "btn-borde"); a.style.padding = "9px 16px"; a.style.fontSize = "14px"; ac.appendChild(a); }
+      add("Read or download", l.pdf || l.zenodo, true);
+      if (l.doi) add("DOI", "https://doi.org/" + l.doi, false);
+      card.appendChild(ac); cont.appendChild(card);
+    });
+  }).catch(function () {});
+})();
+</script>
+<footer class="pie">
+  <div class="wrap">
+    <div>
+      <img src="/assets/img/logo-blanco.png" alt="EPIC, Ediciones, Publicaciones e Investigaciones Científicas" width="900" height="290">
+      <p>EPICEC S.A.S. · Ediciones, Publicaciones e Investigaciones Científicas</p>
+      <p>RUC 1391940129001 · Ecuador</p>
+    </div>
+    <div>
+      <h4>Documents</h4>
+      <ul>
+        <li><a href="/en/editorial-policies/">Editorial policies</a></li>
+        <li><a href="/en/editorial-policies/#terms">Terms of service</a></li>
+        <li><a href="/en/editorial-policies/#peer-review">Peer review policy</a></li>
+        <li><a href="/en/editorial-policies/#complaints">Complaints and personal data</a></li>
+        <li><a href="/en/editorial-board/">Editorial Board</a></li>
+        <li><a href="/en/verify/">Verify certificate</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <p><a href="mailto:contacto@editorialepic.com">contacto@editorialepic.com</a></p>
+    </div>
+  </div>
+  <div class="legal"><div class="wrap">&copy; 2026 EPICEC S.A.S. All rights reserved.</div></div>
+</footer>
+</body>
+</html>

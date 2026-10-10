@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verify certificate | EPIC</title>
+<meta name="description" content="Check the authenticity of a certificate or letter issued by EPIC using its verification code.">
+<link rel="canonical" href="https://editorialepic.com/en/verify/">
+<link rel="alternate" hreflang="es" href="https://editorialepic.com/verificar/">
+<link rel="alternate" hreflang="en" href="https://editorialepic.com/en/verify/">
+<link rel="alternate" hreflang="x-default" href="https://editorialepic.com/verificar/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EPIC">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="es_EC">
+<meta property="og:title" content="Verify certificate | EPIC">
+<meta property="og:description" content="Check the authenticity of a certificate or letter issued by EPIC using its verification code.">
+<meta property="og:url" content="https://editorialepic.com/en/verify/">
+<meta property="og:image" content="https://editorialepic.com/assets/img/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Verify certificate | EPIC">
+<meta name="twitter:description" content="Check the authenticity of a certificate or letter issued by EPIC using its verification code.">
+<meta name="twitter:image" content="https://editorialepic.com/assets/img/og-image.png">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/site.css">
+</head>
+<body>
+<a class="saltar" href="#contenido">Skip to content</a>
+<nav class="nav" aria-label="Main">
+  <div class="wrap">
+    <a class="marca" href="/en/"><img src="/assets/img/logo-color.png" alt="EPIC, Ediciones, Publicaciones e Investigaciones Científicas" width="900" height="288"></a>
+    <ul>
+      <li><a href="/en/#about">About</a></li>
+      <li><a href="/en/#services">Services</a></li>
+      <li><a href="/en/#process">Process</a></li>
+      <li><a href="/en/editorial-policies/">Policies</a></li>
+      <li><a href="/en/editorial-board/">Editorial Board</a></li>
+      <li><a href="/en/#contact">Contact</a></li>
+      <li class="idioma"><a href="/verificar/" hreflang="es" lang="es" aria-label="Español">ES</a><span aria-label="English (current language)">EN</span></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="contenido">
+  <header class="cabecera">
+    <div class="wrap">
+      <h1>Verify certificate</h1>
+      <p class="entradilla">Check the authenticity of a certificate or letter issued by EPIC. Enter the verification code or scan the QR code on the document.</p>
+    </div>
+  </header>
+  <div class="doc">
+    <div class="texto">
+      <form class="buscador" id="form" role="search" aria-label="Verify certificate">
+        <label for="codigo" style="flex-basis:100%;font-size:14px;color:var(--pizarra);">Verification code</label>
+        <input id="codigo" name="id" type="text" autocomplete="off" spellcheck="false" placeholder="Verification code">
+        <button class="btn btn-tinta" type="submit">Verify</button>
+      </form>
+      <div id="resultado" aria-live="polite"></div>
+    </div>
+  </div>
+</main>
+<script>
+(function () {
+  var res = document.getElementById("resultado");
+  var inp = document.getElementById("codigo");
+  var campos = [["Title", "titulo"], ["Authors", "autores"], ["Date", "fecha"], ["Type", "tipo"], ["ISBN", "isbn"], ["DOI", "doi"]];
+  function limpiar() { while (res.firstChild) res.removeChild(res.firstChild); }
+  function mensaje(clase, titulo, texto) {
+    limpiar();
+    var d = document.createElement("div"); d.className = "cert " + clase;
+    var h = document.createElement("h2"); h.style.fontSize = "22px"; h.textContent = titulo; d.appendChild(h);
+    if (texto) { var p = document.createElement("p"); p.style.margin = "8px 0 0"; p.textContent = texto; d.appendChild(p); }
+    res.appendChild(d); return d;
+  }
+  function buscar(id) {
+    id = (id || "").trim();
+    if (!id) { limpiar(); return; }
+    fetch("/certificados.json", { cache: "no-cache" })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        var lista = (data && data.certificados) || [];
+        var c = lista.filter(function (x) { return String(x.id).toLowerCase() === id.toLowerCase(); })[0];
+        if (!c) { mensaje("invalido", "Not found", "No document exists with the code \u201c" + id + "\u201d. Check that it is typed correctly or write to us at contacto@editorialepic.com."); return; }
+        var d = mensaje("valido", "Valid document", "Code " + c.id);
+        var dl = document.createElement("dl");
+        campos.forEach(function (f) {
+          var v = c[f[1]]; if (Array.isArray(v)) v = v.join(", ");
+          if (!v) return;
+          var dt = document.createElement("dt"); dt.textContent = f[0];
+          var dd = document.createElement("dd"); dd.textContent = v;
+          dl.appendChild(dt); dl.appendChild(dd);
+        });
+        d.appendChild(dl);
+      })
+      .catch(function () { mensaje("invalido", "Could not check the document", "Please try again in a few minutes."); });
+  }
+  document.getElementById("form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var id = inp.value.trim();
+    history.replaceState(null, "", id ? "?id=" + encodeURIComponent(id) : location.pathname);
+    buscar(id);
+  });
+  var q = new URLSearchParams(location.search).get("id");
+  if (q) { inp.value = q; buscar(q); }
+})();
+</script>
+<footer class="pie">
+  <div class="wrap">
+    <div>
+      <img src="/assets/img/logo-blanco.png" alt="EPIC, Ediciones, Publicaciones e Investigaciones Científicas" width="900" height="290">
+      <p>EPICEC S.A.S. · Ediciones, Publicaciones e Investigaciones Científicas</p>
+      <p>RUC 1391940129001 · Ecuador</p>
+    </div>
+    <div>
+      <h4>Documents</h4>
+      <ul>
+        <li><a href="/en/editorial-policies/">Editorial policies</a></li>
+        <li><a href="/en/editorial-policies/#terms">Terms of service</a></li>
+        <li><a href="/en/editorial-policies/#peer-review">Peer review policy</a></li>
+        <li><a href="/en/editorial-policies/#complaints">Complaints and personal data</a></li>
+        <li><a href="/en/editorial-board/">Editorial Board</a></li>
+        <li><a href="/en/verify/">Verify certificate</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <p><a href="mailto:contacto@editorialepic.com">contacto@editorialepic.com</a></p>
+    </div>
+  </div>
+  <div class="legal"><div class="wrap">&copy; 2026 EPICEC S.A.S. All rights reserved.</div></div>
+</footer>
+</body>
+</html>
