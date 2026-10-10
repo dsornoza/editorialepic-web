@@ -55,6 +55,15 @@ p{margin:0 0 16px;}
 }
 .nav ul a:hover,.nav ul a[aria-current="page"]{color:var(--azul-tinta);border-bottom-color:var(--ambar);}
 
+/* Selector de idioma */
+.nav ul .idioma{display:flex;gap:2px;border:1px solid var(--borde);border-radius:999px;padding:2px;margin-left:6px;}
+.nav ul .idioma a,.nav ul .idioma span{
+  padding:3px 11px;border-radius:999px;font-size:12.5px;font-weight:600;line-height:1.5;border:0;
+}
+.nav ul .idioma span{background:var(--azul-tinta);color:#fff;}
+.nav ul .idioma a{color:var(--pizarra);}
+.nav ul .idioma a:hover{color:var(--azul-tinta);background:var(--marfil);border:0;}
+
 /* Botones */
 .btns{display:flex;flex-wrap:wrap;gap:12px;}
 .btn{
