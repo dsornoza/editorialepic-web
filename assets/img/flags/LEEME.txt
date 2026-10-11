@@ -1,0 +1,5 @@
+Banderas del Consejo Editorial
+------------------------------
+Un archivo PNG de 64x48 px por país, con el código ISO 3166-1 alfa-2 en minúsculas (mx.png, ec.png, pe.png...).
+Se generan a partir de las banderas del proyecto open source "flag-icons" (https://github.com/lipis/flag-icons),
+licencia MIT, Copyright (c) 2013 Panayiotis Lipiridis.

@@ -204,7 +204,12 @@ section.marfil{background:var(--marfil);}
 }
 .estado-vacio p{margin:0;}
 .miembros{list-style:none;margin:0;padding:0;display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));}
-.miembro{border:1px solid var(--borde);border-radius:var(--radio-lg);padding:22px;background:#fff;}
+.miembro{border:1px solid var(--borde);border-radius:var(--radio-lg);padding:22px;background:#fff;position:relative;}
+.miembro-bandera{
+  position:absolute;top:18px;right:18px;width:32px;height:24px;border-radius:3px;
+  box-shadow:0 0 0 1px rgba(27,42,73,.18);
+}
+.miembro-nombre{padding-right:46px;}
 .miembro p{margin:0 0 4px;font-size:14.5px;color:var(--pizarra);}
 .miembro-cargo{font-size:12px!important;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ambar-texto)!important;}
 .miembro-nombre{font-size:19px;margin:4px 0 8px;}
