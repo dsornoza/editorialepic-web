@@ -23,3 +23,6 @@ _fuente/
 
 # QR generados (se guardan localmente, no se publican)
 _qr/
+
+# Plantillas Word (se guardan localmente)
+_plantillas/
