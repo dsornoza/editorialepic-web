@@ -85,6 +85,8 @@
       .then(function (data) {
         var lista = (data && data.certificados) || [];
         var c = lista.filter(function (x) { return String(x.id).toLowerCase() === id.toLowerCase(); })[0];
+        var anul = ((data && data.anulados) || []).some(function (x) { return String(x).toLowerCase() === id.toLowerCase(); });
+        if (!c && anul) { mensaje("anulado", "Anulado", "El documento con el código " + id + " fue anulado y ya no tiene validez. Si tienes dudas, escríbenos a contacto@editorialepic.com."); return; }
         if (!c) { mensaje("invalido", "No encontrado", "No existe un documento con el código «" + id + "». Revisa que esté bien escrito o escríbenos a contacto@editorialepic.com."); return; }
         var d = mensaje("valido", "Documento válido", "Código " + c.id);
         var dl = document.createElement("dl");

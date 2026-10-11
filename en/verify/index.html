@@ -85,6 +85,8 @@
       .then(function (data) {
         var lista = (data && data.certificados) || [];
         var c = lista.filter(function (x) { return String(x.id).toLowerCase() === id.toLowerCase(); })[0];
+        var anul = ((data && data.anulados) || []).some(function (x) { return String(x).toLowerCase() === id.toLowerCase(); });
+        if (!c && anul) { mensaje("anulado", "Voided", "The document with the code " + id + " has been voided and is no longer valid. If you have questions, write to us at contacto@editorialepic.com."); return; }
         if (!c) { mensaje("invalido", "Not found", "No document exists with the code \u201c" + id + "\u201d. Check that it is typed correctly or write to us at contacto@editorialepic.com."); return; }
         var d = mensaje("valido", "Valid document", "Code " + c.id);
         var dl = document.createElement("dl");

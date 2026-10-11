@@ -219,6 +219,7 @@ section.marfil{background:var(--marfil);}
 .cert{border:1px solid var(--borde);border-radius:var(--radio-lg);padding:26px 28px;margin-top:22px;}
 .cert.valido{border-color:var(--salvia);background:#F3F7F4;}
 .cert.invalido{border-color:#C8B27A;background:#FBF7EA;}
+.cert.anulado{border-color:#B65A4A;background:#FBF1EE;}
 .cert dl{display:grid;grid-template-columns:140px 1fr;gap:8px 18px;margin:16px 0 0;}
 .cert dt{color:var(--pizarra);font-size:14px;}
 .cert dd{margin:0;font-weight:500;overflow-wrap:anywhere;}
