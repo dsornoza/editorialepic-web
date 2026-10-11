@@ -26,3 +26,6 @@ _qr/
 
 # Plantillas Word (se guardan localmente)
 _plantillas/
+
+# Firmas de correo (se guardan localmente)
+_firmas/
