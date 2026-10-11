@@ -20,3 +20,6 @@ node_modules/
 
 # Archivos fuente del logo (no se publican)
 _fuente/
+
+# QR generados (se guardan localmente, no se publican)
+_qr/
