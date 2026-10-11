@@ -10,5 +10,12 @@
     "doi": "DOI de la obra",
     "tipo": "Carta de aceptación | Certificado de arbitraje | Carta de publicación | Certificado de revisión por pares"
   },
-  "certificados": []
+  "certificados": [
+    {
+      "id": "EPIC-2026-CE-0001",
+      "tipo": "Certificado de integrante del Consejo Editorial",
+      "fecha": "2026-10-11",
+      "titular": "Juan Gutiérrez García"
+    }
+  ]
 }

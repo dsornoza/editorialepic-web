@@ -25,8 +25,9 @@ TIPOS = {
     "AR": "Certificado de arbitraje",
     "PU": "Carta de publicación",
     "RV": "Certificado de revisión por pares",
+    "CE": "Certificado de integrante del Consejo Editorial",
 }
-PATRON = re.compile(r"^EPIC-(\d{4})-(AC|AR|PU|RV)-(\d{4})$")
+PATRON = re.compile(r"^EPIC-(\d{4})-(AC|AR|PU|RV|CE)-(\d{4})$")
 
 
 def cargar(ruta):
@@ -117,7 +118,8 @@ def main():
     sub = p.add_subparsers(dest="cmd", required=True)
 
     n = sub.add_parser("nuevo", help="registra un certificado y genera su QR")
-    n.add_argument("--tipo", required=True, choices=sorted(TIPOS), help="AC, AR, PU o RV")
+    n.add_argument("--tipo", required=True, choices=sorted(TIPOS), help="AC, AR, PU, RV o CE")
+    n.add_argument("--titular", default="", help="Solo CE: nombre del integrante del Consejo")
     n.add_argument("--titulo", default="")
     n.add_argument("--autores", default="", help='separados por ";"')
     n.add_argument("--fecha", default=datetime.date.today().isoformat(), help="AAAA-MM-DD")
@@ -136,7 +138,7 @@ def main():
         if not certs:
             print("No hay certificados registrados.")
         for c in certs:
-            print(f'{c["id"]}  {c.get("fecha", "")}  {c.get("tipo", "")}  {c.get("titulo", "")}')
+            print(f'{c["id"]}  {c.get("fecha", "")}  {c.get("tipo", "")}  {c.get("titulo") or c.get("titular", "")}')
         return
 
     if args.cmd == "anular":
@@ -159,11 +161,20 @@ def main():
     if args.tipo == "RV" and (args.titulo or args.autores or args.isbn or args.doi):
         sys.exit("Certificado de revisión (RV): por la política de confidencialidad no se registra título, "
                  "autores, ISBN ni DOI. Solo tipo y fecha.")
-    if args.tipo != "RV" and not args.titulo:
+    if args.tipo == "CE":
+        if not args.titular:
+            sys.exit("Certificado de integrante (CE): falta --titular.")
+        if args.titulo or args.autores or args.isbn or args.doi:
+            sys.exit("Certificado de integrante (CE): solo se registra titular y fecha.")
+    elif args.titular:
+        sys.exit("--titular solo se usa con el tipo CE.")
+    if args.tipo not in ("RV", "CE") and not args.titulo:
         sys.exit("Falta --titulo.")
 
     cid = siguiente_id(certs, fecha.year, args.tipo, datos.get("anulados", []))
     registro = {"id": cid, "tipo": TIPOS[args.tipo], "fecha": fecha.isoformat()}
+    if args.titular:
+        registro["titular"] = args.titular
     if args.titulo:
         registro["titulo"] = args.titulo
     autores = [x.strip() for x in args.autores.split(";") if x.strip()]

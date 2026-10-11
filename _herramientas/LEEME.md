@@ -18,6 +18,7 @@ Formato: **`EPIC-AAAA-TT-NNNN`**
 | `AR` | Certificado de arbitraje |
 | `PU` | Carta de publicación |
 | `RV` | Certificado de revisión por pares (para revisores) |
+| `CE` | Certificado de integrante del Consejo Editorial |
 
 Ejemplos: `EPIC-2026-AR-0001`, `EPIC-2026-PU-0014`, `EPIC-2027-RV-0003`.
 
@@ -30,6 +31,7 @@ Reglas:
 ## 2. Qué se registra y qué no
 
 - Cartas y certificados de una obra (`AC`, `AR`, `PU`): título, autores, fecha, ISBN y DOI (si ya existen).
+- **Certificados de integrante del Consejo (`CE`): solo titular y fecha** (`--titular "Nombre Apellido"`). El nombre ya es público en la página del Consejo; no se registran otros datos.
 - **Certificados de revisión (`RV`): solo tipo y fecha.** No se registran título, autores, ISBN, DOI ni el nombre del revisor, porque las políticas dicen que la identidad de los revisores es confidencial y que el listado no se vincula con obras concretas. El script lo impide.
 - `certificados.json` es público: cualquiera puede descargarlo.
 
