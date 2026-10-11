@@ -55,6 +55,11 @@ Reglas:
 4. **Publicar `certificados.json`** (commit y push). El registro aparece en `/verificar/` en uno o dos minutos.
 5. Probar: escanear el QR con un celular y comprobar que dice «Documento válido» y que los datos coinciden.
 
+Para un documento en inglés, agrega `--idioma en`: el QR apunta a `/en/verify/` y el sello dice «Verify this document».
+Para volver a generar el QR de un código ya registrado (por ejemplo, la versión en inglés):
+`python3 _herramientas/certificado.py qr EPIC-2026-CE-0001 --idioma en`
+(crea `..._en.png`, `..._en.svg` y `..._sello_en.png`).
+
 Otros comandos:
 - `python3 _herramientas/certificado.py listar` muestra los certificados registrados.
 - `python3 _herramientas/certificado.py anular EPIC-2026-AR-0001` lo retira (pasa a «No encontrado») y reserva el código.

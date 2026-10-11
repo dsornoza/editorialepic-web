@@ -49,23 +49,31 @@ def siguiente_id(certs, anio, tipo, anulados=()):
     return f"EPIC-{anio}-{tipo}-{(max(usados) + 1) if usados else 1:04d}"
 
 
-def url_verificacion(cid):
-    return f"{SITIO}/verificar/?id={cid}"
+def url_verificacion(cid, idioma="es"):
+    ruta = "/en/verify/" if idioma == "en" else "/verificar/"
+    return f"{SITIO}{ruta}?id={cid}"
 
 
-def generar_qr(cid, carpeta):
+TEXTOS_SELLO = {
+    "es": ("Verifica este documento", "editorialepic.com/verificar", "Código"),
+    "en": ("Verify this document", "editorialepic.com/en/verify", "Code"),
+}
+
+
+def generar_qr(cid, carpeta, idioma="es"):
     try:
         import segno
     except ImportError:
         print("  (No se generó el QR: falta la librería. Instala con: pip install --user segno)")
         return None
     os.makedirs(carpeta, exist_ok=True)
-    qr = segno.make(url_verificacion(cid), error="q", micro=False)
-    png = os.path.join(carpeta, f"{cid}.png")
-    svg = os.path.join(carpeta, f"{cid}.svg")
+    qr = segno.make(url_verificacion(cid, idioma), error="q", micro=False)
+    suf = "_en" if idioma == "en" else ""
+    png = os.path.join(carpeta, f"{cid}{suf}.png")
+    svg = os.path.join(carpeta, f"{cid}{suf}.svg")
     qr.save(png, scale=12, border=3, dark="#1B2A49", light="#FFFFFF")
     qr.save(svg, scale=12, border=3, dark="#1B2A49", light="#FFFFFF")
-    sello = crear_sello(cid, png, carpeta)
+    sello = crear_sello(cid, png, carpeta, idioma)
     return png, svg, sello
 
 
@@ -86,7 +94,7 @@ def _fuente(tam, negrita=False):
     return ImageFont.load_default()
 
 
-def crear_sello(cid, png_qr, carpeta):
+def crear_sello(cid, png_qr, carpeta, idioma="es"):
     """QR + texto, listo para pegar en Word/Canva (esquina inferior derecha, mínimo 2,5 cm de ancho)."""
     from PIL import Image, ImageDraw
     qr = Image.open(png_qr).convert("RGB")
@@ -103,10 +111,11 @@ def crear_sello(cid, png_qr, carpeta):
         w = d.textlength(texto, font=fuente)
         d.text(((ancho - w) / 2, y), texto, font=fuente, fill=color)
 
-    centrado("Verifica este documento", base, _fuente(34, True))
-    centrado("editorialepic.com/verificar", base + 48, _fuente(30), "#5B6572")
-    centrado(f"Código {cid}", base + 98, _fuente(32, True))
-    ruta = os.path.join(carpeta, f"{cid}_sello.png")
+    t1, t2, t3 = TEXTOS_SELLO[idioma]
+    centrado(t1, base, _fuente(34, True))
+    centrado(t2, base + 48, _fuente(30), "#5B6572")
+    centrado(f"{t3} {cid}", base + 98, _fuente(32, True))
+    ruta = os.path.join(carpeta, f"{cid}_sello{'_en' if idioma == 'en' else ''}.png")
     lienzo.save(ruta, optimize=True)
     return ruta
 
@@ -125,8 +134,12 @@ def main():
     n.add_argument("--fecha", default=datetime.date.today().isoformat(), help="AAAA-MM-DD")
     n.add_argument("--isbn", default="")
     n.add_argument("--doi", default="")
+    n.add_argument("--idioma", choices=["es", "en"], default="es", help="idioma del QR y del sello")
 
     sub.add_parser("listar", help="muestra los certificados registrados")
+    q = sub.add_parser("qr", help="vuelve a generar el QR y el sello de un código ya registrado")
+    q.add_argument("id")
+    q.add_argument("--idioma", choices=["es", "en"], default="es")
     a = sub.add_parser("anular", help="elimina un certificado (deja de verificarse)")
     a.add_argument("id")
 
@@ -139,6 +152,15 @@ def main():
             print("No hay certificados registrados.")
         for c in certs:
             print(f'{c["id"]}  {c.get("fecha", "")}  {c.get("tipo", "")}  {c.get("titulo") or c.get("titular", "")}')
+        return
+
+    if args.cmd == "qr":
+        if not any(str(c.get("id")).lower() == args.id.lower() for c in certs):
+            sys.exit(f"No existe el código {args.id}. Regístralo primero con 'nuevo'.")
+        res = generar_qr(args.id, args.qr, args.idioma)
+        if res:
+            print(f"  URL de verificación: {url_verificacion(args.id, args.idioma)}")
+            print(f"  QR (PNG):    {res[0]}\n  QR (SVG):    {res[1]}\n  Sello listo: {res[2]}")
         return
 
     if args.cmd == "anular":
@@ -188,8 +210,8 @@ def main():
     guardar(args.json, datos)
 
     print(f"Registrado: {cid}  ({TIPOS[args.tipo]})")
-    print(f"  URL de verificación: {url_verificacion(cid)}")
-    res = generar_qr(cid, args.qr)
+    print(f"  URL de verificación: {url_verificacion(cid, args.idioma)}")
+    res = generar_qr(cid, args.qr, args.idioma)
     if res:
         print(f"  QR (PNG):    {res[0]}")
         print(f"  QR (SVG):    {res[1]}")
