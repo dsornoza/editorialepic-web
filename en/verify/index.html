@@ -68,6 +68,7 @@
 (function () {
   var res = document.getElementById("resultado");
   var inp = document.getElementById("codigo");
+  var TIPOS_EN = {"Carta de aceptación": "Acceptance letter", "Certificado de arbitraje": "Peer review certificate", "Carta de publicación": "Publication letter", "Certificado de revisión por pares": "Peer reviewer certificate", "Certificado de integrante del Consejo Editorial": "Editorial Board member certificate"};
   var campos = [["Holder", "titular"], ["Title", "titulo"], ["Authors", "autores"], ["Date", "fecha"], ["Type", "tipo"], ["ISBN", "isbn"], ["DOI", "doi"]];
   function limpiar() { while (res.firstChild) res.removeChild(res.firstChild); }
   function mensaje(clase, titulo, texto) {
@@ -92,6 +93,7 @@
         var dl = document.createElement("dl");
         campos.forEach(function (f) {
           var v = c[f[1]]; if (Array.isArray(v)) v = v.join(", ");
+          if (f[1] === "tipo") v = TIPOS_EN[v] || v;
           if (!v) return;
           var dt = document.createElement("dt"); dt.textContent = f[0];
           var dd = document.createElement("dd"); dd.textContent = v;
