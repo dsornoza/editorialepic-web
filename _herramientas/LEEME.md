@@ -78,3 +78,15 @@ El QR apunta a `https://editorialepic.com/verificar/?id=CÓDIGO`.
 - **Texto del sello:** «Verifica este documento · editorialepic.com/verificar · Código EPIC-AAAA-TT-NNNN». Si el documento se imprime sin QR legible, el código sirve para verificar a mano.
 - **En Word o Canva:** inserta el PNG del sello como imagen, con «ajustar a texto: delante» y anclado a la página. Para impresión profesional, usa el SVG del QR.
 - **En el texto del documento**, agrega una línea como: «Este documento puede verificarse en editorialepic.com/verificar con el código EPIC-AAAA-TT-NNNN».
+
+## 5. Alta de un integrante del Consejo en un solo paso
+
+`_herramientas/nuevo_miembro.py` agrega la tarjeta en las dos páginas del Consejo, crea la bandera si falta, registra el código `CE`, genera el QR en inglés y el certificado Word en `_plantillas/emitidos/`. No hace commit: se revisa y se publica después. En Claude Code, la skill local `nuevo-miembro-consejo` (en `.claude/skills/`) lo ejecuta a partir de los datos del miembro y redacta el correo en inglés.
+
+```
+python3 _herramientas/nuevo_miembro.py --nombre "Nombre Apellido" --institucion "Institución" \
+    --pais-es Kenia --pais-en Kenya --iso ke --orcid 0000-0000-0000-0000 \
+    --area-en "Field of knowledge"
+```
+
+Las tarjetas muestran solo institución, país y ORCID; el área de conocimiento va únicamente en el certificado.
